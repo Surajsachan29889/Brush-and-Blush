@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-x: hidden;
+}
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+.rose-gold-gradient {
+  background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Horizontal auto-scroll carousel (infinite) */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.carousel-track--left {
+  animation: scroll-left 40s linear infinite;
+}
+
+.carousel-track--right {
+  animation: scroll-right 40s linear infinite;
+}
+
+.carousel-track--left:hover,
+.carousel-track--right:hover {
+  animation-play-state: paused;
+}
+
+/* Black side shading on carousels – hidden on mobile, visible from sm up */
+.carousel-side-shade {
+  position: relative;
+}
+.carousel-side-shade::before,
+.carousel-side-shade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: none;
+  z-index: 10;
+  pointer-events: none;
+}
+@media (min-width: 640px) {
+  .carousel-side-shade::before,
+  .carousel-side-shade::after {
+    width: 80px;
+    max-width: 18vw;
+  }
+  .carousel-side-shade::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+  }
+  .carousel-side-shade::after {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.7), transparent);
+  }
+}
+@media (min-width: 1024px) {
+  .carousel-side-shade::before,
+  .carousel-side-shade::after {
+    width: 120px;
+    max-width: 20vw;
+  }
+}
+.carousel-side-shade::before {
+  left: 0;
+}
+.carousel-side-shade::after {
+  right: 0;
+  left: auto;
+}
